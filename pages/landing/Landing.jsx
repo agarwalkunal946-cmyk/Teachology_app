@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import Hero from "./Hero";
 import Tools from "./Tools";
 import Pricing from "./Pricing";
@@ -8,21 +8,26 @@ import Newsletter from "./Newsletter";
 
 function Landing() {
   return (
-    <ScrollView style={styles.container}>
-      <Hero />
-      <Tools />
-      <Pricing />
-      <FAQ />
-      <Newsletter />
-    </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.homePage}>
+        <Hero />
+        <Tools />
+        <Pricing />
+        <FAQ />
+        <Newsletter />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f3f2f9',
-    },
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  homePage: {
+    flex: 1,
+  },
 });
 
 export default Landing;

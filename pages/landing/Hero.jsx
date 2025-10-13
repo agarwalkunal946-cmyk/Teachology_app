@@ -1,37 +1,95 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { theme } from '../../styles/theme';
 
 const Hero = () => {
-    const navigation = useNavigation();
-    return (
-        <ImageBackground source={require('../../assets/img/hero/hero.png')} style={styles.heroSection} resizeMode="cover">
-            <View style={styles.heroContent}>
-                <View style={styles.heroText}>
-                    <Text style={styles.subHeadline}>Revolutionizing Education with AI</Text>
-                    <Text style={styles.heroHeadline}>Learn Smarter, Teach Better!</Text>
-                    <Text style={styles.heroDescription}>Meet Simplify Teaching — your AI-powered assistant to save time and elevate learning.</Text>
-                    <TouchableOpacity style={styles.exploreButton} onPress={() => navigation.navigate('Login')}>
-                        <Text style={styles.exploreButtonText}>Explore Our Tools</Text>
-                    </TouchableOpacity>
-                </View>
-                <Image source={require('../../assets/img/hero/hero.png')} style={styles.heroImage} resizeMode="contain" />
-            </View>
-        </ImageBackground>
-    );
+  const navigation = useNavigation();
+
+  return (
+    <View style={styles.heroSection}>
+      <View style={styles.heroContent}>
+        <View style={styles.heroText}>
+          <Text style={styles.subHeadline}>
+            Revolutionizing Education with AI
+          </Text>
+          <Text style={styles.heroHeadline}>
+            Learn Smarter, Teach Better!
+          </Text>
+          <Text style={styles.heroDescription}>
+            Meet Simplify Teaching — your AI-powered assistant to save time and
+            elevate learning. From lesson plans to exam prep and assessments, our
+            smart tool makes studying and teaching effortless.
+          </Text>
+          <TouchableOpacity 
+            style={styles.exploreButton} 
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={styles.exploreButtonText}>Explore Our Tools</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.heroImageWrapper}>
+          <Image
+            source={require("../../assets/img/teachology/hero.png")}
+            style={styles.heroImage}
+            resizeMode="contain"
+          />
+        </View>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    heroSection: { minHeight: 500, justifyContent: 'center', padding: 20 },
-    heroContent: { alignItems: 'center' },
-    heroText: { alignItems: 'center', marginBottom: 32 },
-    subHeadline: { fontSize: 20, fontWeight: '500', color: theme.colors.textDark },
-    heroHeadline: { fontWeight: '800', lineHeight: 50, color: theme.colors.primary, fontSize: 40, textAlign: 'center', marginVertical: 8 },
-    heroDescription: { fontSize: 16, fontWeight: '400', textAlign: 'center', marginBottom: 24, lineHeight: 24, color: theme.colors.textDark, paddingHorizontal: 10 },
-    exploreButton: { backgroundColor: theme.colors.primary, paddingVertical: 14, paddingHorizontal: 40, borderRadius: 30 },
-    exploreButtonText: { color: 'white', fontSize: 16, fontWeight: 'bold' },
-    heroImage: { width: '90%', height: 250 },
+  heroSection: {
+    padding: 20,
+    backgroundColor: '#f0f4ff',
+  },
+  heroContent: {
+    alignItems: 'center',
+  },
+  heroText: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  subHeadline: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#443fe1',
+    marginBottom: 8,
+  },
+  heroHeadline: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  heroDescription: {
+    fontSize: 16,
+    color: '#555555',
+    textAlign: 'center',
+    lineHeight: 24,
+    marginBottom: 24,
+  },
+  exploreButton: {
+    backgroundColor: '#443fe1',
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 50,
+  },
+  exploreButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  heroImageWrapper: {
+    width: '100%',
+    height: 250,
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
+  },
 });
 
 export default Hero;
