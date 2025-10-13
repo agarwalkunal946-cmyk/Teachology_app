@@ -1,0 +1,176 @@
+{
+  "RubricGenerator": {
+    "gradeLevel": {
+      "tooltip": "Select the academic grade level of the students this rubric is for."
+    },
+    "pointScale": {
+      "tooltip": "Define the maximum possible score for the assignment."
+    },
+    "standard": {
+      "tooltip": "Choose the type of standard or objective the rubric should be based on."
+    },
+    "assignmentDescription": {
+      "tooltip": "Describe the assignment in detail. What are the students expected to do?"
+    },
+    "additionalCustomization": {
+      "tooltip": "Enter any extra details or specific focus areas for the rubric."
+    }
+  },
+  "WritingFeedback": {
+    "gradeLevel": {
+      "tooltip": "Select the student's academic grade level to tailor the feedback appropriately."
+    },
+    "assignmentDescription": {
+      "tooltip": "Provide the original assignment prompt or a brief description of what the student was asked to do."
+    },
+    "feedbackType": {
+      "tooltip": "Choose whether you want general feedback or feedback based on a formal rubric structure."
+    },
+    "additionalInstructions": {
+      "tooltip": "Add any specific instructions, like 'focus on the introduction' or 'check for run-on sentences'."
+    },
+    "writingContent": {
+      "tooltip": "Paste the complete text of the student's writing that you want to get feedback on."
+    }
+  },
+  "TextDependentQuestions": {
+    "gradeLevel": {
+      "tooltip": "Select the target grade level for the questions to adjust their complexity."
+    },
+    "numberOfQuestions": {
+      "tooltip": "Enter the total number of questions you want to generate."
+    },
+    "questionType": {
+      "tooltip": "Choose the type of questions you want to generate, like 'Multiple Choice' or 'True/False'."
+    },
+    "questionLevel": {
+      "tooltip": "Select the difficulty level for the questions."
+    },
+    "uploadContentType": {
+      "tooltip": "Choose the source of your content: paste plain text, upload a document, or use an existing study plan."
+    },
+    "description": {
+      "tooltip": "Paste the text passage that the questions should be based on. This is required for 'Plain Text' content type."
+    },
+    "studyPlan": {
+      "tooltip": "Select one of your saved study plans to generate questions from its topics."
+    },
+    "topics": {
+      "tooltip": "Select one or more topics from the chosen study plan to focus the question generation."
+    }
+  },
+  "SummarizeText": {
+    "summaryLengthType": {
+      "tooltip": "Choose the format for your summary, such as paragraphs, bullet points, or a specific word count."
+    },
+    "summaryLengthNumber": {
+      "tooltip": "Specify the exact count for the summary type you selected (e.g., enter '3' for 3 paragraphs or '100' for 100 words)."
+    },
+    "originalText": {
+      "tooltip": "Paste the text you want to summarize. This is optional if you are uploading a document."
+    }
+  },
+  "TextTranslator": {
+    "translateLanguage": {
+      "tooltip": "Enter the language you want to translate the text into, e.g., 'Spanish', 'Japanese', 'Hindi'."
+    },
+    "translateText": {
+      "tooltip": "Paste the original text that you want to translate here."
+    }
+  },
+  "StudyPlannerPage": {
+    "gradeLevel": {
+      "tooltip": "Select the student's academic grade level to tailor the study plan."
+    },
+    "plan": {
+      "tooltip": "Describe your specific goal or ask a question about the plan. For example, 'Create a plan focusing on weak areas like Algebra and Geometry'."
+    },
+    "days": {
+      "tooltip": "Enter the total number of days you have to prepare for the exam."
+    },
+    "subject": {
+      "tooltip": "Specify the main subject of the study plan, such as 'Physics', 'History', or 'General Studies'."
+    },
+    "exam_name": {
+      "tooltip": "Enter the name of the exam you are preparing for, e.g., 'SAT', 'UPSC Prelims'."
+    },
+    "syllabus_text": {
+      "tooltip": "Optionally, paste the detailed syllabus here to make the plan more accurate."
+    },
+    "image": {
+      "tooltip": "Optionally, upload an image of your syllabus (PDF, JPG, PNG)."
+    },
+    "per_question_time": {
+      "tooltip": "Set the average time (in minutes) you want to allocate for each practice question."
+    },
+    "per_exam_questions": {
+      "tooltip": "Define how many questions (5-30) should be in each practice test."
+    }
+  },
+  "MathProblemSolver": {
+    "uploadedImage": {
+      "tooltip": "Upload an image file (JPG, PNG) containing a single math problem."
+    }
+  },
+  "PaperFinder": {
+    "searchQuery": {
+      "tooltip": "Enter keywords, topics, author names, or titles to find relevant academic research papers."
+    }
+  },
+  "CurrentAffairsSelector": {
+    "examName": {
+      "tooltip": "Enter the name of the competitive exam you are preparing for to get relevant current affairs questions."
+    }
+  },
+  "DailyNews": {
+    "country": {
+      "tooltip": "Select a country to view top news headlines from that region."
+    },
+    "language": {
+      "tooltip": "Choose the language for the news articles."
+    }
+  },
+  "DrawBot": {
+    "prompt": {
+      "tooltip": "Describe the concept you want the AI to explain and illustrate, for example, 'photosynthesis' or 'the water cycle'."
+    }
+  },
+  "MathVisualizer": {
+    "equation": {
+      "tooltip": "Enter a mathematical equation. Use Python syntax (e.g., '**' for power). For example: y = sin(x)"
+    },
+    "dimension": {
+      "tooltip": "Select the dimensionality of the plot (1D, 2D, or 3D)."
+    },
+    "range": {
+      "tooltip": "Set the minimum and maximum values for each axis."
+    },
+    "parameters": {
+      "tooltip": "Define any constants or parameters used in your equation, e.g., 'a=1, b=2'."
+    },
+    "points": {
+      "tooltip": "Set the number of points to calculate for the plot. More points mean a smoother curve but slower generation."
+    }
+  },
+"MoleculeVisualizerPage": {
+  "smilesOrFormula": {
+    "tooltip": "Enter a chemical formula (e.g., H2O) or a SMILES string (e.g., CCO for ethanol) to generate a 3D model."
+  }
+},
+  "VivaInterviewerBot": {
+    "syllabusFile": {
+      "tooltip": "Upload your syllabus (PDF, DOC, or image) to tailor the viva questions to your curriculum."
+    }
+  },
+  "AIPresentationGenerator": {
+    "topic": {
+      "tooltip": "Enter the main subject of your presentation. Be as specific as you like."
+    },
+    "slideCount": {
+      "tooltip": "Select the total number of slides you want the AI to generate."
+    },
+    "audience": {
+      "tooltip": "Describe your audience to help the AI tailor the content's tone and complexity (e.g., 'university students', 'business executives')."
+    }
+  }
+}

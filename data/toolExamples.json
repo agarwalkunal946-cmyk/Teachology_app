@@ -1,0 +1,48 @@
+{
+  "RubricGenerator": {
+    "gradeLevel": "10th Grade",
+    "pointScale": "100",
+    "standard": "Standard",
+    "assignmentDescription": "Write a 5-paragraph essay analyzing the main themes in 'To Kill a Mockingbird'.",
+    "additionalCustomization": "Focus on clarity of argument and use of textual evidence."
+  },
+  "WritingFeedback": {
+    "gradeLevel": "9th Grade",
+    "assignmentDescription": "Summarize the key events of the American Revolution.",
+    "feedbackType": "General Feedback",
+    "additionalInstructions": "Please check for grammatical errors and awkward phrasing.",
+    "writingContent": "The American Revolution was a pivotal period in history. The colonists were unhappy with British rule and taxes. This led to many protests, like the Boston Tea Party. The war started in 1775 and after many battles, the colonists won their independence."
+  },
+  "TextTranslator": {
+    "translateLanguage": "es",
+    "translateText": "Hello, how are you today?"
+  },
+  "TextDependentQuestions": {
+    "gradeLevel": "5th Grade",
+    "numberOfQuestions": "5",
+    "questionType": "Multiple Choice",
+    "questionLevel": "Easy",
+    "uploadContentType": "Plain Text",
+    "description": "The Solar System consists of the Sun and everything that orbits, or travels around, the Sun. This includes the eight planets and their moons, dwarf planets, and countless asteroids, comets, and other small, icy objects."
+  },
+  "StudyPlannerPage": {
+    "gradeLevel": "5th Grade",
+    "plan": "Create a plan focusing on weak areas like Algebra and Geometry.",
+    "days": "3",
+    "subject": "Mathematics",
+    "exam_name": "SAT",
+    "syllabus_text": "Algebra: linear equations, inequalities. Geometry: circles, triangles, theorems.",
+    "per_question_time": "1",
+    "per_exam_questions": "5"
+  },
+  "SummarizeText": {
+    "summaryLengthType": "Paragraph(s)",
+    "summaryLengthNumber": "2",
+    "originalText": "The Industrial Revolution was the transition to new manufacturing processes in Europe and the United States, in the period from about 1760 to sometime between 1820 and 1840. This transition included going from hand production methods to machines, new chemical manufacturing and iron production processes, the increasing use of steam power and water power, the development of machine tools and the rise of the mechanized factory system. The Industrial Revolution also led to an unprecedented rise in the rate of population growth."
+  },
+    "AIPresentationGenerator": {
+      "topic": "The Basics of Quantum Computing",
+      "slideCount": "10",
+      "audience": "High school students with an interest in science"
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "titleBeforeLogin": "Choose the Perfect Plan for You",
+  "descriptionBeforeLogin": "Flexible & Affordable Pricing for Students and Teachers.",
+  "sideTextBeforeLogin": "Transforming Aspiring Minds using AI Tools",
+  "sideDescriptionBeforeLogin": "We offer a variety of flexible plans, for students, teachers, professionals, and institutes.",
+
+  "titleAfterLogin": "Upgrade Your Plan",
+  "disclaimerAfterLogin": "All plans come with a 3-day free trial.",
+
+  "plans": [
+    {
+      "id":1,
+      "name": "Basic",
+      "price": "₹0",
+      "tokens": "10000",
+      "validity": "a month",
+      "current": true  
+    },
+    {
+      "id":2,
+      "name": "Standard",
+      "price": "₹399",
+      "tokens": "50000",
+      "validity": "a month",
+      "linkBeforeLogin": "/service-details/live-online-courses",
+      "soonAfterLogin": true 
+    },
+    {
+      "id":3,
+      "name": "Premium",
+      "price": "₹799",
+      "tokens": "100000",
+      "validity": "3 months",
+      "linkBeforeLogin": "/service-details/personalized-mentoring",
+      "soonAfterLogin": true
+    },
+    {
+      "id":4,
+      "name": "Diamond",
+      "price": "₹1099",
+      "tokens": "150000",
+      "validity": "6 months",
+      "linkBeforeLogin": "/service-details/personalized-mentoring",
+      "soonAfterLogin": true 
+    }
+
+  ]
+}
