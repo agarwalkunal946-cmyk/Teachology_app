@@ -1,33 +1,38 @@
 import React, { useState } from "react";
 import {
+  StyleSheet,
   View,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
   Image,
+  ScrollView,
   ActivityIndicator,
-  Alert,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import api from '../utils/apiLogger'; // Asegúrate de que la ruta sea correcta
-import { sendOtpEndpoint, apiUrl } from '../config/config'; // Asegúrate de que la ruta sea correcta
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
-function EnterIdentifier() {
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [loading, setLoading] = useState(false);
+import api from '../utils/apiLogger';
+import { sendOtpEndpoint } from '../config/config';
+import { VITE_APP_API_BASE_URL } from '@env';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+const EnterIdentifierScreen = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   const validateEmail = () => {
     if (!email.trim()) {
-      setEmailError("El correo electrónico es obligatorio.");
+      setEmailError("Email is required.");
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setEmailError("Formato de correo electrónico no válido.");
+      setEmailError("Invalid email format.");
       return false;
     }
     setEmailError("");
@@ -43,168 +48,198 @@ function EnterIdentifier() {
 
     try {
       const payload = { email: email };
-      const response = await api.post(`${apiUrl}${sendOtpEndpoint}`, payload);
+      const response = await api.post(`${VITE_APP_API_BASE_URL}${sendOtpEndpoint}`, payload);
       
       if (response.data.status === 200) {
-        Alert.alert("Éxito", response.data.message || "OTP enviado con éxito. Redirigiendo...");
-        
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: response.data.message || "OTP sent successfully! Redirecting..."
+        });
         const currentEmail = email;
+        
         setEmail("");
         setEmailError("");
 
-        // Navegar a la pantalla de verificación de OTP
-        navigation.navigate("VerifyMobileOtp", { identifier: currentEmail });
-
+        setTimeout(() => {
+          navigation.navigate("VerifyMobileOtp", { identifier: currentEmail });
+        }, 2000);
       } else {
-        Alert.alert("Error", response.data.message || "No se pudo enviar el OTP.");
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: response.data.message || "Failed to send OTP."
+        });
       }
     } catch (error) {
-      const message = error.response?.data?.message || "No se pudo enviar el OTP. Por favor, inténtalo de nuevo.";
-      Alert.alert("Error", message);
+      const message = error.response?.data?.message || "Failed to send OTP. Please try again.";
+      Toast.show({
+        type: 'error',
+        text1: 'Request Failed',
+        text2: message
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.card}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Iniciar sesión con OTP</Text>
-          <Text style={styles.subtitle}>Introduce tu correo electrónico para obtener un OTP</Text>
-        </View>
-
-        <View style={styles.form}>
-          <View style={styles.inputGroup}>
-            <View style={styles.inputIcon}>
-              <Image
-                source={require("../assets/img/login/envelope.png")} // Asegúrate de que la ruta sea correcta
-                style={{ width: 18, height: 18, tintColor: '#888' }}
-              />
-            </View>
-            <TextInput
-              style={styles.input}
-              placeholder="Introduce tu correo electrónico"
-              value={email}
-              onChangeText={(text) => {
-                setEmail(text);
-                if (emailError) setEmailError("");
-              }}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              editable={!loading}
-              placeholderTextColor="#999"
-            />
-          </View>
-          
-          <View style={styles.errorContainer}>
-            {emailError && <Text style={styles.errorText}>{emailError}</Text>}
-          </View>
-
-          <TouchableOpacity
-            style={[styles.submitButton, loading && styles.buttonDisabled]}
-            onPress={sendOtp}
-            disabled={loading}
+    <SafeAreaView style={styles.safeArea}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardAvoidingView}
+        >
+          <ScrollView
+            contentContainerStyle={styles.scrollContainer}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
           >
-            {loading ? (
-              <ActivityIndicator color="#ffffff" />
-            ) : (
-              <Text style={styles.submitButtonText}>Enviar OTP</Text>
-            )}
-          </TouchableOpacity>
-        </View>
+            <View style={styles.contentContainer}>
+              <View style={styles.header}>
+                <Text style={styles.headerTitle}>Login with OTP</Text>
+                <Text style={styles.headerSubtitle}>
+                  Enter your email to get an OTP
+                </Text>
+              </View>
 
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            ¿Recuerdas tu contraseña?{" "}
-            <Text style={styles.link} onPress={() => navigation.navigate('Login')}>
-              Inicia sesión aquí
-            </Text>
-          </Text>
-        </View>
-      </View>
+              <View style={styles.form}>
+                <View style={styles.inputGroup}>
+                  <Image
+                    source={require('../assets/img/login/envelope.png')}
+                    style={styles.inputIcon}
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your email"
+                    placeholderTextColor="#888"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    value={email}
+                    onChangeText={(text) => {
+                      setEmail(text);
+                      if (emailError) {
+                        setEmailError("");
+                      }
+                    }}
+                    editable={!loading}
+                  />
+                </View>
+
+                {emailError ? <Text style={styles.inputError}>{emailError}</Text> : <View style={styles.errorPlaceholder} />}
+                
+                <TouchableOpacity
+                  style={[styles.submitButton, loading && styles.disabledButton]}
+                  onPress={sendOtp}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <ActivityIndicator size="small" color="#ffffff" />
+                  ) : (
+                    <Text style={styles.submitButtonText}>Send OTP</Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.footer}>
+                <Text style={styles.footerText}>
+                  Remember your password?{' '}
+                  <Text style={styles.footerLink} onPress={() => navigation.navigate('Login')}>
+                    Login here
+                  </Text>
+                </Text>
+              </View>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f2f5',
-    padding: 20,
+    backgroundColor: '#FFFFFF',
   },
-  card: {
-    width: '100%',
-    maxWidth: 400,
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  contentContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
   },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
+  headerTitle: {
+    fontSize: 32,
+    fontWeight: '700',
+    color: '#1A202C',
+    marginBottom: 16,
   },
-  subtitle: {
+  headerSubtitle: {
     fontSize: 16,
-    color: '#666',
+    fontWeight: '400',
+    color: '#4A5568',
+    textAlign: 'center',
   },
   form: {
     width: '100%',
   },
   inputGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f7f7f7',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    paddingHorizontal: 15,
+    marginBottom: 5,
+    position: 'relative',
   },
   inputIcon: {
-    marginRight: 10,
+    position: 'absolute',
+    left: 14,
+    top: 15,
+    width: 20,
+    height: 20,
+    zIndex: 1,
   },
   input: {
-    flex: 1,
-    height: 50,
+    width: '100%',
+    height: 52,
+    paddingLeft: 52,
+    paddingRight: 16,
+    borderRadius: 8,
+    backgroundColor: '#F7FAFC',
     fontSize: 16,
-    color: '#333',
+    color: '#242424',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
-  errorContainer: {
-    minHeight: 24,
-    justifyContent: 'center',
+  inputError: {
+    color: '#d93025',
+    fontSize: 12,
+    paddingLeft: 10,
+    marginBottom: 15,
+    height: 24,
   },
-  errorText: {
-    color: '#e74c3c',
-    fontSize: 14,
-    paddingTop: 4,
+  errorPlaceholder: {
+    height: 24,
+    marginBottom: 15,
   },
   submitButton: {
-    backgroundColor: '#443FE1',
-    paddingVertical: 15,
-    borderRadius: 10,
+    backgroundColor: '#443fe1',
+    paddingVertical: 16,
+    borderRadius: 100,
     alignItems: 'center',
-    marginTop: 5,
+    justifyContent: 'center',
+    width: '100%',
   },
-  buttonDisabled: {
-    backgroundColor: '#a9a7e0',
+  disabledButton: {
+    opacity: 0.6,
   },
   submitButtonText: {
     color: '#ffffff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '600',
   },
   footer: {
     marginTop: 30,
@@ -212,12 +247,12 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 14,
-    color: '#666',
+    color: '#4A5568',
   },
-  link: {
-    color: '#443FE1',
-    fontWeight: 'bold',
+  footerLink: {
+    color: '#443fe1',
+    fontWeight: '700',
   },
 });
 
-export default EnterIdentifier;
+export default EnterIdentifierScreen;

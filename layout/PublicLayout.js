@@ -1,9 +1,10 @@
-import React from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import Header from "../pages/Header";
-import Footer from "../pages/Footer";
-import { useAuth } from "../App";
+import Header from '../pages/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Footer from '../pages/Footer';
+import { useAuth } from '../App';
 import { theme } from '../styles/theme';
 
 const PublicLayout = ({ children }) => {
@@ -11,13 +12,13 @@ const PublicLayout = ({ children }) => {
   const route = useRoute();
 
   const noFooterPaths = [
-    "Login",
-    "Register",
-    "ForgotPassword",
-    "ResetPassword",
-    "ResetEmail",
-    "VerifyEmailOTP",
-    "VerifyMobileOTP",
+    'Login',
+    'Register',
+    'ForgotPassword',
+    'ResetPassword',
+    'ResetEmail',
+    'VerifyEmailOTP',
+    'VerifyMobileOTP',
   ];
 
   const showFooter = !noFooterPaths.includes(route.name);
@@ -25,10 +26,12 @@ const PublicLayout = ({ children }) => {
   return (
     <SafeAreaView style={styles.publicLayoutContainer}>
       <Header isLoggedIn={isLoggedIn} user={user} />
-      <View style={styles.mainPublicContent}>
+      {/* View ko ScrollView se replace kiya gaya hai */}
+      <ScrollView contentContainerStyle={styles.mainPublicContent}>
         {children}
-      </View>
-      {showFooter && <Footer />}
+        {/* Footer ko ScrollView ke andar move kiya gaya hai */}
+        {showFooter && <Footer />}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -39,8 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   mainPublicContent: {
-    flex: 1,
-    paddingTop: theme.headerHeight
+    flexGrow: 1,
   },
 });
 

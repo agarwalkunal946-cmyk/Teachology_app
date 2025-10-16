@@ -1,37 +1,35 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 
 function Footer() {
-  return (
-    <View style={styles.footer}>
-      <View style={styles.footerContainer}>
+  const auth = useSelector((state) => state.auth);
+
+  if (!auth.user) {
+    return (
+      <View style={styles.footer}>
         <Text style={styles.footerCopyright}>
-          Copyright © Teachology AI 2025. Todos los derechos reservados.
+          Copyright © Teachology AI 2025. All rights reserved.
         </Text>
       </View>
-    </View>
-  );
+    );
+  }
+
+  return null;
 }
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: '#443FE1',
+    backgroundColor: "#443fe1",
     paddingVertical: 25,
-    paddingHorizontal: '5%',
-    width: '100%',
-    marginTop: 10,
-  },
-  footerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    maxWidth: 1400,
-    marginHorizontal: 'auto',
+    paddingHorizontal: "5%",
+    width: "100%",
   },
   footerCopyright: {
-    margin: 0,
+    color: "#FFFFFF",
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
-    textAlign: 'center',
+    textAlign: "center",
+    opacity: 0.9,
   },
 });
 

@@ -56,7 +56,7 @@ const Newsletter = () => {
         </View>
       </View>
       <Image
-        source={{ uri: "/assets/img/teachology/6870f20cb44338cb05a82d44_Asset-2-2.png" }}
+        source={{ uri: "../../assets/img/teachology/6870f20cb44338cb05a82d44_Asset-2-2.png" }}
         style={styles.newsletterImage}
         resizeMode="contain"
       />
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
   },
   newsletterImage: {
     width: 250,
-    height: 180,
   },
 });
 
